@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import PicCard from "./components/PicCard/PicCard.js";
 import Wrapper from "./components/Wrapper/Wrapper.js";
+import Score from "./components/Score/Score.js"
 import landmarks from "./landmarks.json";
 
 class App extends Component {
@@ -32,6 +33,10 @@ class App extends Component {
     if (this.state.score > this.state.topScore) {
       this.setState({ topScore: this.state.score });
     }
+    if(this.state.score  === 12) {
+      this.setState({message: "You Won! Great Job! Click to play again!"});
+      return;
+    }
   }
     shuffleArray = (landmarksArray) => {
       for (let i = landmarksArray.length -1; i > 0; i--) {
@@ -45,13 +50,13 @@ class App extends Component {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1 className = "App-title">Welcome To The Clicky Game Made By React!</h1>
+        <h1 className = "App-title">Welcome To The Landmarks Clicky Game Made By React!</h1>
       </header>
-      <h3>
-        <strong className= "instruction">Click on a different image every time to earn points, game is over when you click on the same image twice!</strong>
-        <p className = "score"><strong>Score: {this.state.score} | TopScore: {this.state.topScore}</strong></p>
-        <p className = "message"><strong>{this.state.message}</strong></p>
-      </h3>
+      <Score
+      score = {this.state.score}
+      topscore = {this.state.topScore}
+      message = {this.state.message}
+      />
       <Wrapper
       shakeWrapper = {this.state.shakeit}
       pictures = 
